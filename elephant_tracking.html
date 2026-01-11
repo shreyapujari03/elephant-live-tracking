@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Elephant Live Tracking - Mysore Forest</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+  />
+
+  <script
+    src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js">
+  </script>
+
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+    }
+    #map {
+      height: 100%;
+      width: 100%;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="map"></div>
+
+  <script>
+    // Elephant path in forest fringes around Mysore
+    var locations = [
+      [12.2965, 76.6380],
+      [12.2975, 76.6400],
+      [12.2985, 76.6420],
+      [12.2995, 76.6440],
+      [12.3005, 76.6460],
+      [12.3015, 76.6480],
+      [12.3025, 76.6500]
+    ];
+
+    var index = 0;
+
+    var map = L.map('map').setView(locations[0], 15);
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 19
+    }).addTo(map);
+
+    var elephantIcon = L.icon({
+      iconUrl: 'https://cdn-icons-png.flaticon.com/512/616/616408.png',
+      iconSize: [40, 40],
+      iconAnchor: [20, 40],
+      popupAnchor: [0, -40]
+    });
+
+    var marker = L.marker(locations[0], {icon: elephantIcon})
+      .addTo(map)
+      .bindPopup("🐘 Elephant Location")
+      .openPopup();
+
+    // Move elephant every 5 seconds
+    setInterval(function () {
+      index = (index + 1) % locations.length;
+      marker.setLatLng(locations[index]);
+      map.panTo(locations[index]);
+    }, 5000);
+  </script>
+</body>
+</html>
