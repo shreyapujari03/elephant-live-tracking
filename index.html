@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Elephant Live Tracking – Mysore Forest Fringe</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Leaflet CSS -->
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+  />
+
+  <!-- Leaflet JS -->
+  <script
+    src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js">
+  </script>
+
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+    }
+    #map {
+      height: 100%;
+      width: 100%;
+    }
+  </style>
+</head>
+
+<body>
+
+<div id="map"></div>
+
+<script>
+  /* 
+   Forest fringe locations near Mysore
+   (Nagarahole – Bandipur – agricultural boundary areas)
+  */
+  const elephantPath = [
+    [12.090, 76.200], // Near Hunsur forest edge
+    [12.095, 76.205], // Forest–field boundary
+    [12.100, 76.210], // Village outskirts
+    [12.105, 76.215], // Crop field near forest
+    [12.110, 76.220]  // Return towards forest
+  ];
+
+  let step = 0;
+
+  // Initialize map
+  const map = L.map('map').setView(elephantPath[0], 13);
+
+  // OpenStreetMap tiles (FREE)
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 18,
+    attribution: '© OpenStreetMap contributors'
+  }).addTo(map);
+
+  // Elephant icon
+  const elephantIcon = L.icon({
+    iconUrl: 'https://cdn-icons-png.flaticon.com/512/616/616408.png',
+    iconSize: [42, 42],
+    iconAnchor: [21, 42],
+    popupAnchor: [0, -40]
+  });
+
+  // Marker
+  const elephantMarker = L.marker(elephantPath[0], {
+    icon: elephantIcon
+  }).addTo(map);
+
+  elephantMarker.bindPopup(
+    "<b>🐘 Elephant Detected</b><br>Forest fringe near Mysore"
+  ).openPopup();
+
+  // Move elephant every 6 seconds (5–7 sec range)
+  setInterval(() => {
+    step = (step + 1) % elephantPath.length;
+    elephantMarker.setLatLng(elephantPath[step]);
+    map.panTo(elephantPath[step]);
+  }, 6000);
+
+</script>
+
+</body>
+</html>
