@@ -1,73 +1,89 @@
-<!DOCTYPE html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html>
 <head>
-  <meta charset="utf-8" />
-  <title>Elephant Live Tracking - Mysore Forest</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <link
-    rel="stylesheet"
-    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-  />
-
-  <script
-    src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js">
-  </script>
-
-  <style>
-    body, html {
-      margin: 0;
-      padding: 0;
-      height: 100%;
-    }
-    #map {
-      height: 100%;
-      width: 100%;
-    }
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2685.3">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px 'Helvetica Neue'}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px 'Helvetica Neue'; min-height: 15.0px}
   </style>
 </head>
-
 <body>
-  <div id="map"></div>
-
-  <script>
-    // Elephant path in forest fringes around Mysore
-    var locations = [
-      [12.2965, 76.6380],
-      [12.2975, 76.6400],
-      [12.2985, 76.6420],
-      [12.2995, 76.6440],
-      [12.3005, 76.6460],
-      [12.3015, 76.6480],
-      [12.3025, 76.6500]
-    ];
-
-    var index = 0;
-
-    var map = L.map('map').setView(locations[0], 15);
-
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      maxZoom: 19
-    }).addTo(map);
-
-    var elephantIcon = L.icon({
-      iconUrl: 'https://cdn-icons-png.flaticon.com/512/616/616408.png',
-      iconSize: [40, 40],
-      iconAnchor: [20, 40],
-      popupAnchor: [0, -40]
-    });
-
-    var marker = L.marker(locations[0], {icon: elephantIcon})
-      .addTo(map)
-      .bindPopup("🐘 Elephant Location")
-      .openPopup();
-
-    // Move elephant every 5 seconds
-    setInterval(function () {
-      index = (index + 1) % locations.length;
-      marker.setLatLng(locations[index]);
-      map.panTo(locations[index]);
-    }, 5000);
-  </script>
+<p class="p1">&lt;!DOCTYPE html&gt;</p>
+<p class="p1">&lt;html&gt;</p>
+<p class="p1">&lt;head&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;meta charset="utf-8" /&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;title&gt;Elephant Live Tracking - Mysore Forest&lt;/title&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;link</p>
+<p class="p1"><span class="Apple-converted-space">    </span>rel="stylesheet"</p>
+<p class="p1"><span class="Apple-converted-space">    </span>href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"</p>
+<p class="p1"><span class="Apple-converted-space">  </span>/&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;script</p>
+<p class="p1"><span class="Apple-converted-space">    </span>src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/script&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;style&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>body, html {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>margin: 0;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>padding: 0;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>height: 100%;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>#map {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>height: 100%;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>width: 100%;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/style&gt;</p>
+<p class="p1">&lt;/head&gt;</p>
+<p class="p2"><br></p>
+<p class="p1">&lt;body&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;div id="map"&gt;&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;script&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>// Elephant path in forest fringes around Mysore</p>
+<p class="p1"><span class="Apple-converted-space">    </span>var locations = [</p>
+<p class="p1"><span class="Apple-converted-space">      </span>[12.2965, 76.6380],</p>
+<p class="p1"><span class="Apple-converted-space">      </span>[12.2975, 76.6400],</p>
+<p class="p1"><span class="Apple-converted-space">      </span>[12.2985, 76.6420],</p>
+<p class="p1"><span class="Apple-converted-space">      </span>[12.2995, 76.6440],</p>
+<p class="p1"><span class="Apple-converted-space">      </span>[12.3005, 76.6460],</p>
+<p class="p1"><span class="Apple-converted-space">      </span>[12.3015, 76.6480],</p>
+<p class="p1"><span class="Apple-converted-space">      </span>[12.3025, 76.6500]</p>
+<p class="p1"><span class="Apple-converted-space">    </span>];</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>var index = 0;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>var map = L.map('map').setView(locations[0], 15);</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>maxZoom: 19</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}).addTo(map);</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>var elephantIcon = L.icon({</p>
+<p class="p1"><span class="Apple-converted-space">      </span>iconUrl: 'https://cdn-icons-png.flaticon.com/512/616/616408.png',</p>
+<p class="p1"><span class="Apple-converted-space">      </span>iconSize: [40, 40],</p>
+<p class="p1"><span class="Apple-converted-space">      </span>iconAnchor: [20, 40],</p>
+<p class="p1"><span class="Apple-converted-space">      </span>popupAnchor: [0, -40]</p>
+<p class="p1"><span class="Apple-converted-space">    </span>});</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>var marker = L.marker(locations[0], {icon: elephantIcon})</p>
+<p class="p1"><span class="Apple-converted-space">      </span>.addTo(map)</p>
+<p class="p1"><span class="Apple-converted-space">      </span>.bindPopup("🐘 Elephant Location")</p>
+<p class="p1"><span class="Apple-converted-space">      </span>.openPopup();</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>// Move elephant every 5 seconds</p>
+<p class="p1"><span class="Apple-converted-space">    </span>setInterval(function () {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>index = (index + 1) % locations.length;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>marker.setLatLng(locations[index]);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>map.panTo(locations[index]);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}, 5000);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/script&gt;</p>
+<p class="p1">&lt;/body&gt;</p>
+<p class="p1">&lt;/html&gt;</p>
 </body>
 </html>
