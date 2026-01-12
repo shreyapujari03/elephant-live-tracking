@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Elephant Live Tracking</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Leaflet CSS -->
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+  />
+
+  <style>
+    html, body, #map {
+      height: 100%;
+      margin: 0;
+    }
+  </style>
+</head>
+<body>
+
+<div id="map"></div>
+
+<!-- Leaflet JS -->
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+<script>
+  // 1️⃣ Map centered near Mysore forest region
+  var map = L.map('map').setView([12.2958, 76.6394], 13);
+
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19,
+  }).addTo(map);
+
+  // 2️⃣ Elephant icon
+  var elephantIcon = L.icon({
+    iconUrl: 'https://cdn-icons-png.flaticon.com/512/616/616408.png',
+    iconSize: [50, 50],
+    iconAnchor: [25, 25]
+  });
+
+  // 3️⃣ Initial elephant position
+  var elephantPath = [
+    [12.2958, 76.6394],
+    [12.2970, 76.6375],
+    [12.2982, 76.6358],
+    [12.2995, 76.6340],
+    [12.3008, 76.6325]
+  ];
+
+  var index = 0;
+
+  var elephantMarker = L.marker(elephantPath[0], {
+    icon: elephantIcon
+  }).addTo(map);
+
+  // 4️⃣ Danger zone (red circle)
+  var dangerZone = L.circle([12.2982, 76.6358], {
+    color: 'red',
+    fillColor: '#ff0000',
+    fillOpacity: 0.35,
+    radius: 500   // meters
+  }).addTo(map);
+
+  dangerZone.bindPopup("🚨 Danger Zone: Elephant Movement Area");
+
+  // 5️⃣ Move elephant every 5–7 seconds
+  function moveElephant() {
+    index = (index + 1) % elephantPath.length;
+    elephantMarker.setLatLng(elephantPath[index]);
+  }
+
+  setInterval(moveElephant, 6000);
+</script>
+
+</body>
+</html>
