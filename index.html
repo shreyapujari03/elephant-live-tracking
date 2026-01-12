@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Mysore Elephant Live Tracking</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Leaflet CSS -->
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+  />
+
+  <style>
+    html, body, #map {
+      height: 100%;
+      margin: 0;
+    }
+  </style>
+</head>
+<body>
+
+<div id="map"></div>
+
+<!-- Leaflet JS -->
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+<script>
+  /* ===============================
+     1. MAP CENTER – MYSORE FOREST
+     =============================== */
+  var map = L.map('map').setView([12.2965, 76.6388], 14);
+
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19,
+  }).addTo(map);
+
+  /* ===============================
+     2. ELEPHANT ICON (FIXED)
+     =============================== */
+  var elephantIcon = L.icon({
+    iconUrl: 'https://cdn-icons-png.flaticon.com/512/616/616408.png',
+    iconSize: [48, 48],
+    iconAnchor: [24, 24]
+  });
+
+  /* ===============================
+     3. ELEPHANT PATH – FOREST FRINGE
+     (Near Nagarahole / Mysore edge)
+     =============================== */
+  var elephantPath = [
+    [12.2965, 76.6388],
+    [12.2976, 76.6372],
+    [12.2989, 76.6356],
+    [12.3001, 76.6340],
+    [12.3012, 76.6325],
+    [12.3000, 76.6338],
+    [12.2987, 76.6352]
+  ];
+
+  var index = 0;
+
+  var elephantMarker = L.marker(elephantPath[0], {
+    icon: elephantIcon
+  }).addTo(map);
+
+  elephantMarker.bindPopup("🐘 Elephant Location");
+
+  /* ===============================
+     4. DANGER ZONE (RED CIRCLE)
+     =============================== */
+  var dangerZone = L.circle([12.2989, 76.6356], {
+    color: 'red',
+    fillColor: '#ff0000',
+    fillOpacity: 0.35,
+    radius: 600
+  }).addTo(map);
+
+  dangerZone.bindPopup("🚨 Danger Zone – Forest Fringe Area");
+
+  /* ===============================
+     5. LIVE MOVEMENT (EVERY 6 SEC)
+     =============================== */
+  function moveElephant() {
+    index = (index + 1) % elephantPath.length;
+    elephantMarker.setLatLng(elephantPath[index]);
+  }
+
+  setInterval(moveElephant, 6000);
+</script>
+
+</body>
+</html>
